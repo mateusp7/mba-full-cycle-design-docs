@@ -201,12 +201,12 @@ A entrega é avaliada contra os critérios abaixo. Todos são obrigatórios.
 
 ### FDD (`docs/FDD.md`)
 
-- ☐ Arquivo existe e está em Markdown
-- ☐ Contém todas as seções obrigatórias listadas no requisito 3
-- ☐ Seção "Contratos públicos" inclui pelo menos 4 endpoints HTTP com payload de exemplo (request e response) e status codes
-- ☐ Matriz de erros usa códigos com prefixo `WEBHOOK_`
-- ☐ Seção "Integração com o sistema existente" referencia pelo menos 4 caminhos de arquivo reais do código base
-- ☐ Seção "Observabilidade" cita métricas, logs e tracing
+- [X] Arquivo existe e está em Markdown
+- [X] Contém todas as seções obrigatórias listadas no requisito 3
+- [X] Seção "Contratos públicos" inclui pelo menos 4 endpoints HTTP com payload de exemplo (request e response) e status codes
+- [X] Matriz de erros usa códigos com prefixo `WEBHOOK_`
+- [X] Seção "Integração com o sistema existente" referencia pelo menos 4 caminhos de arquivo reais do código base
+- [X] Seção "Observabilidade" cita métricas, logs e tracing
 
 ### ADRs (`docs/adrs/ADR-NNN-*.md`)
 
@@ -224,7 +224,7 @@ A entrega é avaliada contra os critérios abaixo. Todos são obrigatórios.
 
 ### README (`README.md`)
 
-- ☐ Contém todas as seções obrigatórias listadas no requisito 6
+- [X] Contém todas as seções obrigatórias listadas no requisito 6
 - [X] Lista pelo menos 1 ferramenta de IA utilizada
 - [X] Mostra pelo menos 2 prompts customizados em blocos de código
 - [X] Descreve pelo menos 2 iterações ou ajustes concretos feitos durante a produção
