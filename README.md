@@ -41,6 +41,15 @@ Após revisar os requisitos do FDD no `CHALLENGE.md`, a skill `fdd-writer` foi a
 
 A revisão também incorporou as exigências específicas do desafio: os fluxos de outbox, worker, retry e DLQ; no mínimo quatro endpoints com exemplos de request, response e status codes; matriz de erros com prefixo `WEBHOOK_*`; observabilidade com métricas, logs e tracing; a seção obrigatória de integração com pelo menos quatro arquivos reais; e uma checklist final para validar os critérios de aceite do FDD.
 
+## Iterações e ajustes
+
+### Ajuste do `AGENTS.md` para explicitar iterações corretivas
+
+- **Estado anterior:** o `AGENTS.md` orientava a não inventar histórico, mas não deixava suficientemente explícito que a modificação de um artefato já criado por não atender às expectativas do usuário deveria ser registrada no README na seção de **Iterações e ajustes**.
+- **Problema identificado:** essa redação poderia fazer com que uma correção solicitada pelo usuário fosse aplicada no documento sem registrar a iteração no processo.
+- **Ajuste realizado:** o `AGENTS.md` passou a exigir o registro em **Iterações e ajustes** para modificações corretivas em documentos, skills, prompts ou outros artefatos já existentes, incluindo estado anterior, problema, ação, resultado e contagem de iterações.
+- **Resultado:** futuras correções motivadas por expectativas não atendidas ou critérios do desafio terão seu histórico documentado de forma obrigatória.
+
 ## Prompts customizados
 
 ### Levantamento de evidências
