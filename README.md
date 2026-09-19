@@ -19,7 +19,15 @@ O trabalho também busca manter a rastreabilidade das informações, conectando 
 
 ### Criação do arquivo mapping
 
-Neste momento, foi adicionada a interação para criação do arquivo [`docs/mapping.md`](docs/mapping.md). O objetivo é apoiar a criação do tracker futuramente e manter um histórico mapeado das evidências, decisões e referências do projeto quando novos chats forem abertos para a geração dos demais documentos.
+Neste momento, foi adicionada a interação para criação do arquivo [`docs/mapping.md`](docs/mapping.md). O objetivo foi manter um histórico mapeado das evidências, decisões e referências do projeto quando novos chats fossem abertos para a geração dos demais documentos.
+
+### Criação da primeira versão incremental do Tracker
+
+Após a consolidação dos seis ADRs e do RFC, foi criada a primeira versão do [`docs/TRACKER.md`](docs/TRACKER.md). Essa versão registra os itens relevantes desses documentos, usando a transcrição como fonte das decisões e o código existente como fonte das evidências de integração. O Tracker será ampliado nas revisões do PRD e do FDD e passará por uma auditoria final de cobertura quando o pacote estiver estabilizado.
+
+### Atualização incremental do AGENTS.md
+
+Para operacionalizar a estratégia do Tracker, o [`AGENTS.md`](AGENTS.md) passou a exigir sua atualização no mesmo ciclo de trabalho em que cada documento é criado ou alterado. O guia agora diferencia o papel do `mapping.md` como inventário de evidências, o papel do Tracker como registro dos itens efetivamente documentados e a auditoria final de cobertura do pacote completo.
 
 ### Geração da skill de adr-writer
 

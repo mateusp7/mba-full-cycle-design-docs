@@ -124,19 +124,67 @@ partes ainda estejam marcadas como pendentes de evidência.
 
 ### 4. Atualizar rastreabilidade e referências
 
-Depois da edição:
+A rastreabilidade deve ser mantida de forma incremental. A atualização do
+Tracker é uma etapa obrigatória do encerramento da edição de cada documento; não
+deve ser deixada exclusivamente para a revisão final.
 
-- atualize `docs/mapping.md` quando a matriz de evidências ganhar ou perder
-  informação;
-- adicione ou ajuste a linha correspondente no `docs/TRACKER.md` para todo
-  item identificável relevante;
-- revise links, IDs, nomes de ADRs e referências entre PRD, RFC, ADRs e FDD;
-- procure contradições, duplicações e afirmações sem fonte.
+#### 4.1 Antes e durante a produção
 
-O Tracker deve manter, no mínimo, 80% de cobertura dos itens identificáveis,
-70% das linhas com fonte `TRANSCRICAO` e pelo menos 5 linhas com fonte
-`CODIGO`, conforme os critérios do desafio. Cada linha deve usar a tabela
-obrigatória e uma localização concreta.
+- use `docs/mapping.md` como inventário das evidências primárias, lacunas,
+  hipóteses, decisões, requisitos, exclusões e referências ao código;
+- atualize `docs/mapping.md` quando uma nova evidência for encontrada ou quando
+  uma evidência deixar de sustentar um item;
+- mantenha no `mapping.md` as evidências ainda não utilizadas nos documentos,
+  inclusive sugestões, hipóteses e questões abertas;
+- não crie uma linha no Tracker para cada frase produzida; registre somente
+  itens documentais relevantes e atômicos.
+
+#### 4.2 Ao concluir ou alterar um documento
+
+Ao concluir uma primeira versão ou alterar um documento já existente, execute a
+atualização do Tracker no mesmo ciclo de trabalho, antes de considerar a tarefa
+encerrada:
+
+1. leia o documento alterado e identifique requisitos, decisões, restrições,
+   alternativas, trade-offs, exclusões, questões abertas e evidências de
+   integração;
+2. para cada item efetivamente registrado no documento, crie ou atualize uma
+   linha em `docs/TRACKER.md`;
+3. preserve o ID quando apenas a redação do mesmo item mudar; crie um novo ID
+   somente para um item documental diferente;
+4. remova do Tracker os itens que deixarem de existir no documento, mantendo a
+   evidência no `mapping.md` quando ela ainda for relevante como item descartado,
+   hipótese ou questão aberta;
+5. use a fonte primária do item: `TRANSCRICAO` com timestamp e participante ou
+   `CODIGO` com caminho real do arquivo existente;
+6. se o item não tiver origem identificável, não o registre como fato no
+   Tracker: remova-o, limite sua formulação ou classifique-o explicitamente como
+   hipótese/questão aberta no documento responsável;
+7. revise links, IDs, nomes de ADRs e referências entre PRD, RFC, ADRs e FDD;
+8. procure contradições, duplicações e afirmações sem fonte.
+
+Uma mesma decisão pode aparecer em mais de um documento. Nesse caso, registre
+uma linha para cada ocorrência documental relevante, mantendo a mesma origem
+primária e IDs próprios para cada documento. Não use outro documento como fonte
+(`RFC`, `ADR`, `FDD` etc.); use a transcrição ou o código que sustentam o item.
+
+Artefatos propostos na reunião, mas ainda inexistentes no repositório, devem ser
+rastreados como `TRANSCRICAO`, nunca como `CODIGO`. Use `CODIGO` somente para
+arquivos, módulos, classes ou padrões que possam ser verificados no sistema
+existente.
+
+#### 4.3 Auditoria final
+
+Quando PRD, RFC, FDD e ADRs estiverem estabilizados, faça uma varredura final
+dos documentos contra o Tracker e o `mapping.md`. Confirme, no mínimo:
+
+- pelo menos 80% de cobertura dos itens identificáveis;
+- pelo menos 70% das linhas com fonte `TRANSCRICAO` e localização válida;
+- pelo menos 5 linhas com fonte `CODIGO` e caminho real;
+- IDs únicos, tabela no formato obrigatório e localizações concretas;
+- ausência de linhas para itens removidos ou artefatos inexistentes tratados como
+  código;
+- coerência entre os documentos, as fontes e as referências cruzadas.
 
 ### 5. Registrar a mudança no README
 
