@@ -217,7 +217,7 @@ A entrega é avaliada contra os critérios abaixo. Todos são obrigatórios.
 
 ### Tracker (`docs/TRACKER.md`)
 
-- ☐ Arquivo existe e segue o formato de tabela definido no requisito 5
+- [X] Arquivo existe e segue o formato de tabela definido no requisito 5
 - ☐ Pelo menos 80% dos itens identificáveis dos documentos têm linha correspondente
 - ☐ Pelo menos 70% das linhas têm Fonte = `TRANSCRICAO` com timestamp válido no formato `[hh:mm] Nome`
 - ☐ Pelo menos 5 linhas têm Fonte = `CODIGO` com caminho de arquivo real

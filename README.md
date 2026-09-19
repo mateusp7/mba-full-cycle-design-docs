@@ -55,6 +55,12 @@ Com a skill `fdd-writer`, foi produzido o [docs/FDD.md](docs/FDD.md) a partir da
 
 No mesmo ciclo, o [docs/TRACKER.md](docs/TRACKER.md) recebeu linhas para os fluxos, contratos, erros, observabilidade, integração e critérios de aceite do FDD. As lacunas de claim/lock, retenção, rotas finais e indexação do retry permaneceram explicitamente abertas.
 
+### Revisão da skill de prd-writer
+
+A skill `prd-writer` foi revisada contra o requisito de PRD e os critérios de aceite do `CHALLENGE.md`. O novo fluxo prioriza a leitura de `TRANSCRICAO.md`, `docs/mapping.md`, código real e documentos derivados antes da redação, mantendo o PRD no nível de produto e a rastreabilidade no `docs/TRACKER.md`.
+
+Também foram substituídas as regras genéricas de PRD em inglês e de nove seções por uma estrutura em português com as doze áreas exigidas pelo desafio, incluindo no mínimo oito requisitos funcionais, métricas quantitativas, fora de escopo, riscos estruturados, critérios de aceitação e estratégia de testes.
+
 ## Iterações e ajustes
 
 ### Ajuste do `AGENTS.md` para explicitar iterações corretivas
@@ -70,6 +76,13 @@ No mesmo ciclo, o [docs/TRACKER.md](docs/TRACKER.md) recebeu linhas para os flux
 - **Problema identificado:** a geração do FDD deveria ser determinística e baseada nos documentos existentes, sem conduzir uma entrevista ou solicitar confirmações durante a produção.
 - **Ajuste realizado:** a etapa de entrevista foi removida, a skill passou a produzir o documento diretamente a partir das fontes existentes e a instrução redundante foi retirada.
 - **Resultado:** o fluxo do FDD ficou exclusivamente orientado por evidências documentais e pelo código existente. Esta foi a primeira iteração corretiva da skill após sua criação.
+
+### Revisão da skill `prd-writer` para atender ao `CHALLENGE.md`
+
+- **Estado anterior:** a skill usava um modelo genérico de nove seções, exigia a produção do PRD em inglês e permitia inferir detalhes quando a resposta do usuário não os fornecia.
+- **Problema identificado:** esse formato não cobria todas as áreas obrigatórias do PRD do desafio nem orientava adequadamente a leitura da transcrição, do mapping, do código e dos documentos derivados. Também não validava explicitamente os mínimos de oito requisitos funcionais, uma meta quantitativa, dois itens fora de escopo e dois riscos com probabilidade, impacto e mitigação.
+- **Ajuste realizado:** a skill passou a operar em português e orientada por evidências, definiu as doze seções do PRD, preservou estados de decisão, adotou IDs `PRD-*`, instruiu a atualização do Tracker e incluiu uma checklist final interna alinhada aos critérios de aceite do desafio. A entrevista deixou de ser obrigatória quando o repositório já fornece contexto suficiente.
+- **Resultado:** a geração do PRD ficou específica para o desafio, mais eficiente na descoberta das fontes e com validação explícita de completude e rastreabilidade. Contagem desta skill: 1 iteração corretiva registrada.
 
 ## Prompts customizados
 
