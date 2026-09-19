@@ -29,18 +29,16 @@ transforme decisões de implementação em requisitos de produto.
 Não altere src/, prisma/, tests/, configurações, TRANSCRICAO.md ou CHALLENGE.md.
 A entrega desta skill é documental.
 
-## Entradas
+## Contexto
 
-Do comando ou do usuário, use quando disponíveis:
+- Projeto/feature: Sistema de Webhooks de Notificação de Pedidos;
+- pasta de saída: docs/;
+- arquivo de saída: docs/PRD.md;
+- descrição: conhecida pelo CHALLENGE.md, pela TRANSCRICAO.md, pelo código
+  existente e pelos documentos derivados.
 
-- PROJECT_NAME: nome do produto ou da feature;
-- OUTPUT_FOLDER: pasta de saída;
-- PRD_PATH: caminho completo do PRD, normalmente docs/PRD.md;
-- PRODUCT_DESCRIPTION: descrição fornecida pelo usuário.
-
-O repositório é a fonte de contexto. Se os parâmetros não forem fornecidos,
-assuma PRD_PATH=docs/PRD.md somente quando esse caminho fizer sentido no
-repositório atual; não crie um caminho arbitrário.
+Use qualquer informação adicional fornecida pelo usuário apenas como instrução
+de revisão ou restrição complementar.
 
 ## Evidência e classificação da informação
 
@@ -128,19 +126,7 @@ Use a matriz para verificar que:
 - cada requisito tem pelo menos um critério de aceitação verificável;
 - nenhum item foi criado somente para atingir uma contagem.
 
-### 3. Clarificação, quando necessária
-
-Preserve a essência iterativa da criação de PRD, mas não conduza uma entrevista
-obrigatória quando o repositório já contém evidências suficientes. Pergunte ao
-usuário apenas quando uma lacuna impedir a definição do escopo ou quando ele
-pedir explicitamente uma entrevista interativa. Caso contrário, registre a
-lacuna como hipótese ou questão aberta e continue sem inventar uma resposta.
-
-Se PRODUCT_DESCRIPTION for curto, use primeiro a documentação do desafio e as
-fontes do repositório. Só peça contexto adicional quando nem essas fontes
-permitirem produzir um PRD rastreável.
-
-### 4. Redigir o PRD
+### 3. Redigir o PRD
 
 Escreva o documento em português claro e objetivo. Use o nome original da
 feature no título e IDs estáveis para permitir rastreabilidade:
@@ -367,7 +353,7 @@ impedir o aceite.
 
 ## Salvar e entregar
 
-1. Salve em PRD_PATH.
+1. Salve em docs/PRD.md.
 2. Releia o arquivo salvo e confirme a presença das doze seções, dos oito
    requisitos funcionais mínimos, do objetivo quantificado, das exclusões, dos
    riscos e dos critérios de aceitação.
@@ -376,75 +362,9 @@ impedir o aceite.
 4. Informe ao usuário o caminho exato do PRD e qualquer lacuna que permaneça
    explicitamente aberta.
 
-## Modelo mínimo de saída
+## Modelo de saída
 
-~~~markdown
-# PRD — Sistema de Webhooks de Notificação de Pedidos
-
-## 1. Resumo e contexto da feature
-
-...
-
-## 2. Problema e motivação
-
-...
-
-## 3. Público-alvo e cenários de uso
-
-...
-
-## 4. Objetivos e métricas de sucesso
-
-| ID | Objetivo | Métrica e meta | Condição | Fonte |
-| --- | --- | --- | --- | --- |
-| PRD-OBJ-01 | ... | ... | ... | [hh:mm] Nome |
-
-## 5. Escopo
-
-### Incluído
-
-...
-
-### Fora de escopo
-
-- PRD-OOS-01: ... — Fonte: [hh:mm] Nome.
-- PRD-OOS-02: ... — Fonte: [hh:mm] Nome.
-
-## 6. Requisitos funcionais
-
-### PRD-FR-01 — [título]
-
-- Ator: ...
-- Requisito: ...
-- Prioridade: ...
-- Fonte: [hh:mm] Nome
-- Critérios: PRD-CA-01
-
-## 7. Requisitos não funcionais
-
-...
-
-## 8. Decisões e trade-offs principais
-
-...
-
-## 9. Dependências
-
-...
-
-## 10. Riscos e mitigação
-
-| ID | Risco | Probabilidade | Impacto | Mitigação | Fonte |
-| --- | --- | --- | --- | --- | --- |
-| PRD-RISK-01 | ... | ... | ... | ... | [hh:mm] Nome |
-
-## 11. Critérios de aceitação
-
-### PRD-FR-01
-
-- PRD-CA-01: Dado ..., quando ..., então ...
-
-## 12. Estratégia de testes e validação
-
-...
-~~~
+Ao criar ou revisar docs/PRD.md, leia
+[references/prd-template.md](references/prd-template.md) e use-o como estrutura
+inicial. Substitua todos os marcadores por conteúdo rastreável e não mantenha
+placeholders no arquivo final.

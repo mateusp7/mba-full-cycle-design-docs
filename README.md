@@ -61,6 +61,10 @@ A skill `prd-writer` foi revisada contra o requisito de PRD e os critérios de a
 
 Também foram substituídas as regras genéricas de PRD em inglês e de nove seções por uma estrutura em português com as doze áreas exigidas pelo desafio, incluindo no mínimo oito requisitos funcionais, métricas quantitativas, fora de escopo, riscos estruturados, critérios de aceitação e estratégia de testes.
 
+### Extração do modelo do PRD para uma referência
+
+O modelo mínimo de saída foi movido para [`references/prd-template.md`](.agents/skills/prd-writer/references/prd-template.md), mantendo o `SKILL.md` concentrado no processo, nas regras de evidência e na validação. A skill passou a referenciar esse arquivo quando o PRD é criado ou revisado.
+
 ## Iterações e ajustes
 
 ### Ajuste do `AGENTS.md` para explicitar iterações corretivas
@@ -83,6 +87,13 @@ Também foram substituídas as regras genéricas de PRD em inglês e de nove se�
 - **Problema identificado:** esse formato não cobria todas as áreas obrigatórias do PRD do desafio nem orientava adequadamente a leitura da transcrição, do mapping, do código e dos documentos derivados. Também não validava explicitamente os mínimos de oito requisitos funcionais, uma meta quantitativa, dois itens fora de escopo e dois riscos com probabilidade, impacto e mitigação.
 - **Ajuste realizado:** a skill passou a operar em português e orientada por evidências, definiu as doze seções do PRD, preservou estados de decisão, adotou IDs `PRD-*`, instruiu a atualização do Tracker e incluiu uma checklist final interna alinhada aos critérios de aceite do desafio. A entrevista deixou de ser obrigatória quando o repositório já fornece contexto suficiente.
 - **Resultado:** a geração do PRD ficou específica para o desafio, mais eficiente na descoberta das fontes e com validação explícita de completude e rastreabilidade. Contagem desta skill: 1 iteração corretiva registrada.
+
+### Simplificação do contexto fixo e separação do modelo da skill `prd-writer`
+
+- **Estado anterior:** a skill ainda mantinha uma seção de entradas com parâmetros já conhecidos no repositório, uma etapa de clarificação interativa e o modelo mínimo de saída dentro do `SKILL.md`.
+- **Problema identificado:** essas instruções adicionavam decisões desnecessárias ao fluxo de criação do único arquivo esperado, `docs/PRD.md`, e deixavam o ponto de entrada mais extenso do que o necessário.
+- **Ajuste realizado:** os valores do projeto, da pasta e do arquivo de saída foram fixados na própria skill; a etapa de clarificação foi removida; e o modelo foi extraído para `.agents/skills/prd-writer/references/prd-template.md`, com referência no `SKILL.md`.
+- **Resultado:** a skill ficou focada exclusivamente na criação ou revisão documental do PRD, com contexto pré-preenchido e carregamento separado do modelo. Contagem desta skill: 2 iterações corretivas registradas.
 
 ## Prompts customizados
 
@@ -128,3 +139,4 @@ A ordem sugerida de leitura é:
 6. [`docs/adrs/`](docs/adrs/): decisões arquiteturais e seus trade-offs.
 7. [`docs/FDD.md`](docs/FDD.md): fluxos, contratos e detalhes de implementação.
 8. [`docs/TRACKER.md`](docs/TRACKER.md): rastreabilidade dos itens até suas fontes.
+9. [`prd-template.md`](.agents/skills/prd-writer/references/prd-template.md): modelo estrutural usado pela skill de PRD.
