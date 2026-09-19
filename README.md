@@ -49,6 +49,12 @@ Após revisar os requisitos do FDD no `CHALLENGE.md`, a skill `fdd-writer` foi a
 
 A revisão também incorporou as exigências específicas do desafio: os fluxos de outbox, worker, retry e DLQ; no mínimo quatro endpoints com exemplos de request, response e status codes; matriz de erros com prefixo `WEBHOOK_*`; observabilidade com métricas, logs e tracing; a seção obrigatória de integração com pelo menos quatro arquivos reais; e uma checklist final para validar os critérios de aceite do FDD.
 
+### Consolidação do FDD
+
+Com a skill `fdd-writer`, foi produzido o [docs/FDD.md](docs/FDD.md) a partir da transcrição, do `docs/mapping.md`, dos seis ADRs, do RFC e da inspeção dos caminhos reais em `src/`, `prisma/`, `tests/` e `package.json`. O documento separa decisões fechadas de propostas e questões abertas, sem alterar o código da aplicação.
+
+No mesmo ciclo, o [docs/TRACKER.md](docs/TRACKER.md) recebeu linhas para os fluxos, contratos, erros, observabilidade, integração e critérios de aceite do FDD. As lacunas de claim/lock, retenção, rotas finais e indexação do retry permaneceram explicitamente abertas.
+
 ## Iterações e ajustes
 
 ### Ajuste do `AGENTS.md` para explicitar iterações corretivas

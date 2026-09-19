@@ -100,6 +100,8 @@ Este documento cruza a reunião registrada em [`TRANSCRICAO.md`](../TRANSCRICAO.
 | QA-05 | Aviso por e-mail para falhas consecutivas foi adiado para próxima fase. | `[09:37] Marcos`, `[09:37] Larissa`, `[09:38] Marcos` (linhas 218–222) | Não haverá fallback de e-mail no escopo atual. |
 | QA-06 | Painel visual para o cliente foi separado como projeto do time de frontend. | `[09:39] Marcos`, `[09:40] Larissa` (linhas 232–236) | A entrega atual expõe endpoints; não inclui dashboard. |
 | QA-07 | Prazo foi estimado, mas a transcrição não registra uma data calendárica completa para “fim de novembro”. | `[09:45] Marcos`, `[09:47] Marcos` (linhas 268–278) | O compromisso externo precisa ser confirmado por Marcos; a estimativa interna é de três sprints. |
+| QA-08 | A reunião não fechou a indexação exata entre o limite de cinco tentativas e os cinco intervalos de backoff registrados. | [09:15]–[09:17] Diego e Larissa (linhas 94–108) | O FDD preserva os valores e exige confirmação antes do teste final da agenda. |
+| QA-09 | O FDD trata como proposta, e não decisão, os nomes finais das rotas, envelopes HTTP, claim/lock, granularidade do delivery e identidade do replay. | [09:31]–[09:36] Marcos, Bruno, Diego, Sofia e Larissa; [09:12]–[09:13] Diego e Larissa | A transcrição define casos de uso e restrições, mas não esses detalhes de implementação. |
 
 ## 8. Itens fora de escopo
 

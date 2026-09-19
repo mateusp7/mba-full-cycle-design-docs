@@ -1,8 +1,8 @@
 # Tracker
 
-Esta é a primeira versão incremental do Tracker. Ela cobre os itens relevantes
-registrados nos seis ADRs e no RFC atualmente consolidados. Os itens do PRD e do
-FDD serão adicionados ou revisados quando esses documentos forem estabilizados.
+Esta é uma versão incremental do Tracker. Ela cobre os itens relevantes
+registrados nos seis ADRs, no RFC e no FDD atualmente consolidados. O PRD ainda
+é um placeholder e não acrescenta itens documentais rastreáveis nesta etapa.
 
 As linhas usam a fonte primária do item: `TRANSCRICAO` para decisões, requisitos
 e restrições discutidos na reunião; `CODIGO` somente para arquivos existentes no
@@ -11,6 +11,64 @@ pela transcrição.
 
 | ID | Documento | Tipo | Conteúdo (resumo) | Fonte | Localização |
 | --- | --- | --- | --- | --- | --- |
+| FDD-CTX-01 | `docs/FDD.md` | Contexto | A feature é outbound e integra mudança de status do OMS a clientes externos. | `TRANSCRICAO` | [09:00]–[09:03] Marcos e Sofia |
+| FDD-OBJ-01 | `docs/FDD.md` | Objetivo técnico | Latência inferior a 10 segundos é suficiente e o polling do worker ocorre a cada 2 segundos. | `TRANSCRICAO` | [09:02] Marcos; [09:09]–[09:10] Diego, Marcos e Larissa |
+| FDD-DEC-01 | `docs/FDD.md` | Decisão | Mudança de status e snapshot da outbox compartilham a transação; falha no enqueue provoca rollback. | `TRANSCRICAO` | [09:40]–[09:41] Bruno e Diego |
+| FDD-DEC-02 | `docs/FDD.md` | Decisão | Snapshot é renderizado na inserção e não no envio posterior. | `TRANSCRICAO` | [09:51]–[09:52] Larissa, Diego e Bruno |
+| FDD-FLOW-01 | `docs/FDD.md` | Fluxo | Configurações são filtradas por status na inserção da outbox. | `TRANSCRICAO` | [09:33]–[09:34] Marcos, Bruno e Diego |
+| FDD-FLOW-02 | `docs/FDD.md` | Fluxo | Worker separado faz polling dos pendentes mais antigos em batches pequenos. | `TRANSCRICAO` | [09:08]–[09:11] Diego e Larissa |
+| FDD-FLOW-03 | `docs/FDD.md` | Fluxo | Worker inicia single-worker com ordering por created_at/order_id, sem ordering global. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa |
+| FDD-FLOW-04 | `docs/FDD.md` | Resiliência | Falhas seguem timeout, cinco tentativas, backoff registrado e DLQ separada. | `TRANSCRICAO` | [09:15]–[09:18] Diego, Bruno e Larissa |
+| FDD-FLOW-05 | `docs/FDD.md` | Fluxo | Replay de DLQ recoloca o evento na outbox e exige ADMIN com auditoria do executor. | `TRANSCRICAO` | [09:18] Diego; [09:35]–[09:36] Sofia e Larissa |
+| FDD-CONTRATO-01 | `docs/FDD.md` | Contrato | CRUD de configuração autenticado cobre criação, edição, remoção e listagem por customer. | `TRANSCRICAO` | [09:31]–[09:33] Marcos, Bruno e Larissa |
+| FDD-CONTRATO-02 | `docs/FDD.md` | Contrato | Histórico expõe os últimos 100 deliveries com payload, resposta e tempo. | `TRANSCRICAO` | [09:34] Marcos |
+| FDD-CONTRATO-03 | `docs/FDD.md` | Contrato | Replay usa POST na rota administrativa de dead-letter. | `TRANSCRICAO` | [09:34]–[09:36] Marcos, Larissa e Diego |
+| FDD-CONTRATO-04 | `docs/FDD.md` | Contrato de segurança | Outbound usa payload enxuto, HMAC, X-Event-Id, X-Signature, X-Timestamp, X-Webhook-Id e Content-Type JSON. | `TRANSCRICAO` | [09:19]–[09:24] Sofia, Diego e Larissa; [09:43]–[09:45] Diego, Bruno e Sofia |
+| FDD-ERRO-01 | `docs/FDD.md` | Erro | Erros de domínio do módulo usam AppError e prefixo WEBHOOK_. | `TRANSCRICAO` | [09:28]–[09:30] Bruno e Larissa |
+| FDD-ERRO-02 | `docs/FDD.md` | Resiliência | Falha externa não desfaz status commitado; falha ao inserir outbox desfaz o conjunto transacional. | `TRANSCRICAO` | [09:04]–[09:06] Bruno, Larissa e Diego; [09:40]–[09:41] Bruno e Diego |
+| FDD-SEC-01 | `docs/FDD.md` | Segurança | HMAC-SHA256 usa secret por endpoint e a antiga permanece válida por 24 horas após rotação. | `TRANSCRICAO` | [09:19]–[09:22] Sofia |
+| FDD-SEC-02 | `docs/FDD.md` | Restrição | URL deve ser HTTPS e payload acima de 64 KB deve ser rejeitado sem truncamento. | `TRANSCRICAO` | [09:23]–[09:24] Sofia, Diego e Larissa |
+| FDD-DEL-01 | `docs/FDD.md` | Semântica de entrega | Entrega at-least-once permite duplicidade; consumidor deduplica por X-Event-Id. | `TRANSCRICAO` | [09:24]–[09:26] Diego, Sofia e Larissa |
+| FDD-OBS-01 | `docs/FDD.md` | Observabilidade | Feature reutiliza o logger Pino estruturado e redaction do sistema existente. | `CODIGO` | src/shared/logger/index.ts:1-32 |
+| FDD-INT-01 | `docs/FDD.md` | Integração | changeStatus usa transação Prisma e é o ponto de extensão do enqueue. | `CODIGO` | src/modules/orders/order.service.ts:126-179 |
+| FDD-INT-02 | `docs/FDD.md` | Integração | Status e transições válidos estão centralizados no módulo de pedidos. | `CODIGO` | src/modules/orders/order.status.ts:1-37 |
+| FDD-INT-03 | `docs/FDD.md` | Integração | Rotas existentes usam autenticação, validação e controllers. | `CODIGO` | src/modules/orders/order.routes.ts:12-24 |
+| FDD-INT-04 | `docs/FDD.md` | Integração | AppError, middleware de erro, logger e request ID formam a infraestrutura reutilizável. | `CODIGO` | src/shared/errors/app-error.ts:3-15; src/middlewares/error.middleware.ts:14-65; src/shared/logger/index.ts:1-32; src/middlewares/request-logger.middleware.ts:5-27 |
+| FDD-INT-05 | `docs/FDD.md` | Integração | API registra controllers/routers no composition root e usa o prefixo /api/v1. | `CODIGO` | src/app.ts:22-73; src/routes/index.ts:13-30 |
+| FDD-INT-06 | `docs/FDD.md` | Integração | Worker e API devem usar instâncias Prisma próprias no mesmo banco. | `CODIGO` | src/config/database.ts:1-10; src/server.ts:1-27 |
+| FDD-CA-01 | `docs/FDD.md` | Critério de aceite | Commit atômico de pedido, histórico, estoque e snapshot. | `TRANSCRICAO` | [09:40]–[09:41] Bruno e Diego |
+| FDD-CA-02 | `docs/FDD.md` | Critério de aceite | Filtro por status, snapshot, timeout, retry, DLQ e replay ADMIN devem ser testáveis. | `TRANSCRICAO` | [09:33]–[09:36]; [09:42]; [09:51]–[09:52] |
+| FDD-CA-03 | `docs/FDD.md` | Critério de aceite | Segurança, headers, at-least-once e ausência de items devem estar no contrato outbound. | `TRANSCRICAO` | [09:19]–[09:26]; [09:43]–[09:45] |
+| FDD-OOS-01 | `docs/FDD.md` | Fora de escopo | Inbound, e-mail de fallback e dashboard não fazem parte desta fase. | `TRANSCRICAO` | [09:02]–[09:03]; [09:37]–[09:40] Sofia, Marcos e Larissa |
+| FDD-OOS-02 | `docs/FDD.md` | Fora de escopo | Arquivamento, ordering global, multi-worker, exactly-once e rate limiting ficam fora ou adiados. | `TRANSCRICAO` | [09:08] Diego; [09:12]–[09:13] Diego e Larissa; [09:24]–[09:26] Diego, Sofia e Larissa; [09:38]–[09:39] Diego e Larissa |
+| FDD-QA-01 | `docs/FDD.md` | Questão aberta | Rotas finais, envelopes, batch, claim/lock, retenção, granularidade do delivery e replay ainda precisam de confirmação. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa; [09:31]–[09:36] Marcos, Bruno, Diego, Sofia e Larissa |
+| FDD-QA-02 | `docs/FDD.md` | Questão aberta | A indexação entre cinco tentativas e os cinco intervalos de backoff não foi fechada. | `TRANSCRICAO` | [09:15]–[09:17] Diego e Larissa |
+| FDD-CONTRATO-05 | `docs/FDD.md` | Contrato de segurança | Rotação de secret mantém a antiga válida por 24 horas. | `TRANSCRICAO` | [09:21]–[09:22] Sofia |
+| FDD-ERRO-03 | `docs/FDD.md` | Matriz de erros | Validação de URL/HTTPS, payload de 64 KB, secret indisponível e falha de enqueue usam códigos WEBHOOK_* e tratamentos distintos. | `TRANSCRICAO` | [09:23]–[09:24] Sofia, Diego e Larissa; [09:28]–[09:29] Bruno e Larissa; [09:40]–[09:41] Bruno e Diego |
+| FDD-ERRO-04 | `docs/FDD.md` | Matriz de erros | Timeout, erro de rede, exaustão de retry, DLQ inexistente e replay conflitante têm tratamento próprio. | `TRANSCRICAO` | [09:15]–[09:18] Diego, Bruno e Larissa; [09:42] Sofia e Diego |
+| FDD-OBS-02 | `docs/FDD.md` | Observabilidade | Métricas propostas cobrem outbox, idade do pendente, tentativas, duração, DLQ e rejeições. | `CODIGO` | src/shared/logger/index.ts:13-29 |
+| FDD-OBS-03 | `docs/FDD.md` | Observabilidade | Logs e traces correlacionam requestId/eventId e não registram secrets ou payload completo. | `CODIGO` | src/shared/logger/index.ts:4-21; src/middlewares/request-logger.middleware.ts:5-24 |
+| FDD-CA-04 | `docs/FDD.md` | Critério de aceite | Snapshot permanece igual quando o pedido muda após o enqueue. | `TRANSCRICAO` | [09:51]–[09:52] Larissa, Diego e Bruno |
+| FDD-CA-05 | `docs/FDD.md` | Critério de aceite | Worker consulta a cada 2 segundos, em batch pequeno e por created_at. | `TRANSCRICAO` | [09:08]–[09:10] Diego e Larissa |
+| FDD-CA-06 | `docs/FDD.md` | Critério de aceite | Single-worker preserva a ordenação aceita por pedido, sem ordering global. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa |
+| FDD-CA-07 | `docs/FDD.md` | Critério de aceite | Timeout de 10 segundos é registrado e entra no retry. | `TRANSCRICAO` | [09:42] Sofia e Diego |
+| FDD-CA-08 | `docs/FDD.md` | Critério de aceite | Retry respeita limite de cinco e intervalos registrados, com indexação final pendente. | `TRANSCRICAO` | [09:15]–[09:17] Diego e Larissa |
+| FDD-CA-09 | `docs/FDD.md` | Critério de aceite | Falha permanente preserva payload, motivo, tentativas e timestamp na DLQ. | `TRANSCRICAO` | [09:17]–[09:18] Larissa e Diego |
+| FDD-CA-10 | `docs/FDD.md` | Critério de aceite | Usuário sem ADMIN não pode fazer replay de DLQ. | `TRANSCRICAO` | [09:35]–[09:36] Sofia e Larissa |
+| FDD-CA-11 | `docs/FDD.md` | Critério de aceite | ADMIN consegue reencaminhar e o executor é auditável. | `TRANSCRICAO` | [09:18] Diego; [09:35]–[09:36] Sofia e Larissa |
+| FDD-CA-12 | `docs/FDD.md` | Critério de aceite | Assinatura HMAC usa a secret própria do endpoint. | `TRANSCRICAO` | [09:19]–[09:21] Sofia |
+| FDD-CA-13 | `docs/FDD.md` | Critério de aceite | Secret antiga funciona por 24 horas após rotação. | `TRANSCRICAO` | [09:21]–[09:22] Sofia |
+| FDD-CA-14 | `docs/FDD.md` | Critério de aceite | URL HTTP é rejeitada e payload acima de 64 KB não é truncado. | `TRANSCRICAO` | [09:23]–[09:24] Sofia, Diego e Larissa |
+| FDD-CA-15 | `docs/FDD.md` | Critério de aceite | Headers outbound exigidos existem e items não aparece no payload. | `TRANSCRICAO` | [09:43]–[09:45] Diego, Bruno e Sofia |
+| FDD-CA-16 | `docs/FDD.md` | Critério de aceite | X-Event-Id permite deduplicação e exactly-once não é oferecido. | `TRANSCRICAO` | [09:24]–[09:26] Diego, Sofia e Larissa |
+| FDD-CA-17 | `docs/FDD.md` | Critério de aceite | CRUD, histórico, rotação e replay têm contratos HTTP sob /api/v1. | `TRANSCRICAO` | [09:31]–[09:36] Marcos, Bruno, Diego, Sofia e Larissa |
+| FDD-CA-18 | `docs/FDD.md` | Critério de aceite | Telemetria cobre métricas, logs com redaction e tracing correlacionado. | `CODIGO` | src/shared/logger/index.ts:4-29; src/middlewares/request-logger.middleware.ts:5-24 |
+| FDD-CA-19 | `docs/FDD.md` | Critério de aceite | Composition root, AppError e changeStatus mantêm os padrões existentes. | `CODIGO` | src/app.ts:22-73; src/shared/errors/app-error.ts:3-15; src/modules/orders/order.service.ts:126-179 |
+| FDD-RISK-01 | `docs/FDD.md` | Risco | Indisponibilidade do cliente pode acumular retry e DLQ. | `TRANSCRICAO` | [09:15]–[09:18] Diego, Bruno e Larissa; [09:42] Sofia e Diego |
+| FDD-RISK-02 | `docs/FDD.md` | Risco | Vazamento de secret ou assinatura em log pode permitir falsificação. | `TRANSCRICAO` | [09:19]–[09:24]; [09:45]–[09:49] Sofia e Larissa |
+| FDD-RISK-03 | `docs/FDD.md` | Risco | Retenção indefinida pode fazer outbox/DLQ crescer sem limite. | `TRANSCRICAO` | [09:08] Diego |
+| FDD-RISK-04 | `docs/FDD.md` | Risco | At-least-once permite duplicidade de entrega. | `TRANSCRICAO` | [09:24]–[09:26] Diego, Sofia e Larissa |
+| FDD-RISK-05 | `docs/FDD.md` | Risco | Escala horizontal e claim/lock podem alterar ordering ou deixar item preso. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa |
 | RFC-CTX-01 | `docs/RFC.md` | Contexto | A feature é exclusivamente outbound e substitui o polling contínuo dos clientes por notificações de mudança de status. | `TRANSCRICAO` | `[09:00] Marcos; [09:02] Sofia; [09:02] Marcos` |
 | RFC-CTX-02 | `docs/RFC.md` | Integração | `changeStatus` é o ponto de integração que concentra a transação do pedido. | `CODIGO` | `src/modules/orders/order.service.ts:126-179` |
 | RFC-CTX-03 | `docs/RFC.md` | Restrição | O banco existente usa MySQL via Prisma. | `CODIGO` | `prisma/schema.prisma:5-9` |
