@@ -1,6 +1,6 @@
 ---
 name: fdd-writer
-description: Conduz uma análise orientada por evidências e, quando necessário, uma entrevista técnica para produzir um Feature Design Document (FDD) em português. No desafio de Webhooks de Notificação de Pedidos, gera um FDD acionável para implementação, alinhado ao CHALLENGE.md, ao código existente, à transcrição, aos ADRs e ao tracker.
+description: Conduz uma análise orientada por evidências para produzir um Feature Design Document (FDD) em português. No desafio de Webhooks de Notificação de Pedidos, gera um FDD acionável para implementação, alinhado ao CHALLENGE.md, ao código existente, à transcrição, aos ADRs e ao tracker.
 ---
 
 # FDD Writer
@@ -70,9 +70,9 @@ forem usados como contexto, preserve a fronteira de cada um.
 
 ## Modo de trabalho no desafio
 
-Quando o repositório do desafio estiver disponível, não comece perguntando ao
-usuário informações que já estão registradas nos arquivos. Faça primeiro o
-levantamento abaixo e use a entrevista somente para resolver ambiguidades.
+Quando o repositório do desafio estiver disponível, produza o FDD a partir dos
+documentos e das evidências existentes. Faça primeiro o levantamento abaixo e
+use somente informações verificáveis nas fontes.
 
 ### 1. Ler o contrato e as regras do repositório
 
@@ -80,7 +80,6 @@ Leia:
 
 - CHALLENGE.md, principalmente os requisitos do FDD, os critérios de aceite,
   a regra de rastreabilidade e a restrição de não alterar o código;
-- AGENTS.md, se existir, para regras locais de manutenção documental;
 - docs/advise.md, se existir, como orientação operacional do desafio.
 
 ### 2. Montar o mapa de evidências antes de redigir
@@ -147,26 +146,6 @@ Use essa matriz para descobrir lacunas, remover conteúdo sem fonte e preparar
 as linhas correspondentes do Tracker. O FDD pode incluir referências de fonte
 nas tabelas e nos critérios de aceite sem transformar-se em uma cópia do
 Tracker.
-
-## Entrevista técnica
-
-O levantamento documental vem antes da entrevista no cenário do desafio. Ainda
-assim, mantenha a essência de entrevista técnica:
-
-- faça uma pergunta por vez;
-- pergunte somente o que não puder ser resolvido por evidência;
-- ofereça duas ou três hipóteses quando houver ambiguidade, identificando-as
-  explicitamente;
-- ao final de cada etapa, apresente um resumo de três a seis linhas e peça
-  confirmação;
-- sinalize contradições antes de consolidar o FDD;
-- se o usuário não confirmar uma hipótese, mantenha-a como aberta ou remova-a;
-- não use travessões.
-
-Em um contexto sem os arquivos do desafio, conduza a entrevista desde o
-contexto da feature. Em um contexto com os arquivos, a primeira interação
-deve apresentar o mapa de evidências e perguntar apenas sobre a primeira
-lacuna relevante.
 
 ## Conteúdo obrigatório do FDD para este desafio
 
@@ -626,4 +605,4 @@ esquema acima. Não substitua nem reescreva o Markdown para produzir o JSON.
 
 Use esta mensagem quando iniciar a atividade:
 
-> Olá! Vou primeiro cruzar o CHALLENGE.md, a transcrição, o mapa de evidências, os documentos derivados e os caminhos reais do código. Depois vou consolidar o FDD com foco em implementação e perguntar apenas sobre lacunas ou decisões ainda abertas. No final, valido a checklist do desafio e posso exportar os dados em JSON. Posso começar lendo as fontes do repositório?
+> Olá! Vou cruzar o CHALLENGE.md, a transcrição, o mapa de evidências, os documentos derivados e os caminhos reais do código. Em seguida, vou consolidar o FDD com foco em implementação, mantendo explícitas as hipóteses e questões abertas. No final, valido a checklist do desafio e posso exportar os dados em JSON.

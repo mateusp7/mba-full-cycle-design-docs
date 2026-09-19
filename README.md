@@ -45,7 +45,7 @@ Foi criado o [`AGENTS.md`](AGENTS.md) como guia de manutenção da entrega docum
 
 ### Geração da skill de fdd-writer
 
-Após revisar os requisitos do FDD no `CHALLENGE.md`, a skill `fdd-writer` foi adaptada para trabalhar de forma orientada por evidências. O fluxo passou a priorizar a leitura da transcrição, do `docs/mapping.md`, dos ADRs, do Tracker e dos caminhos reais do código antes da entrevista técnica, diferenciando decisões fechadas, propostas, hipóteses, questões abertas e artefatos ainda inexistentes.
+Após revisar os requisitos do FDD no `CHALLENGE.md`, a skill `fdd-writer` foi adaptada para trabalhar de forma orientada por evidências. O fluxo passou a priorizar a leitura da transcrição, do `docs/mapping.md`, dos ADRs, do Tracker e dos caminhos reais do código antes da consolidação do documento, diferenciando decisões fechadas, propostas, hipóteses, questões abertas e artefatos ainda inexistentes.
 
 A revisão também incorporou as exigências específicas do desafio: os fluxos de outbox, worker, retry e DLQ; no mínimo quatro endpoints com exemplos de request, response e status codes; matriz de erros com prefixo `WEBHOOK_*`; observabilidade com métricas, logs e tracing; a seção obrigatória de integração com pelo menos quatro arquivos reais; e uma checklist final para validar os critérios de aceite do FDD.
 
@@ -57,6 +57,13 @@ A revisão também incorporou as exigências específicas do desafio: os fluxos 
 - **Problema identificado:** essa redação poderia fazer com que uma correção solicitada pelo usuário fosse aplicada no documento sem registrar a iteração no processo.
 - **Ajuste realizado:** o `AGENTS.md` passou a exigir o registro em **Iterações e ajustes** para modificações corretivas em documentos, skills, prompts ou outros artefatos já existentes, incluindo estado anterior, problema, ação, resultado e contagem de iterações.
 - **Resultado:** futuras correções motivadas por expectativas não atendidas ou critérios do desafio terão seu histórico documentado de forma obrigatória.
+
+### Remoção da entrevista técnica da skill de FDD
+
+- **Estado anterior:** a skill `fdd-writer` incluía uma etapa de entrevista técnica e uma orientação redundante sobre a leitura de contexto já disponível ao agente.
+- **Problema identificado:** a geração do FDD deveria ser determinística e baseada nos documentos existentes, sem conduzir uma entrevista ou solicitar confirmações durante a produção.
+- **Ajuste realizado:** a etapa de entrevista foi removida, a skill passou a produzir o documento diretamente a partir das fontes existentes e a instrução redundante foi retirada.
+- **Resultado:** o fluxo do FDD ficou exclusivamente orientado por evidências documentais e pelo código existente. Esta foi a primeira iteração corretiva da skill após sua criação.
 
 ## Prompts customizados
 
