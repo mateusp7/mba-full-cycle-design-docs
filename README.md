@@ -31,6 +31,16 @@ Após a criação do arquivo [`docs/mapping.md`](docs/mapping.md), foi iniciado 
 
 Após a consolidação dos ADRs, foi criada a skill `rfc-writer` para estruturar o RFC arquitetural com base na `TRANSCRICAO.md`, nos ADRs e nos requisitos do `CHALLENGE.md`. A skill também orienta a separação entre o RFC, o FDD e o PRD, mantendo no RFC apenas a proposta arquitetural, as alternativas, as questões em aberto, os impactos e os riscos.
 
+### Criação do AGENTS.md
+
+Foi criado o [`AGENTS.md`](AGENTS.md) como guia de manutenção da entrega documental. Ele consolida as regras do `CHALLENGE.md` para criação e revisão dos arquivos em `docs/`, define a responsabilidade de cada documento, orienta a atualização do Tracker e estabelece quando uma mudança deve ser registrada no próprio README. O guia também preserva a regra de não inventar a seção `Iterações e ajustes` antes que exista uma iteração real para documentar.
+
+### Geração da skill de fdd-writer
+
+Após revisar os requisitos do FDD no `CHALLENGE.md`, a skill `fdd-writer` foi adaptada para trabalhar de forma orientada por evidências. O fluxo passou a priorizar a leitura da transcrição, do `docs/mapping.md`, dos ADRs, do Tracker e dos caminhos reais do código antes da entrevista técnica, diferenciando decisões fechadas, propostas, hipóteses, questões abertas e artefatos ainda inexistentes.
+
+A revisão também incorporou as exigências específicas do desafio: os fluxos de outbox, worker, retry e DLQ; no mínimo quatro endpoints com exemplos de request, response e status codes; matriz de erros com prefixo `WEBHOOK_*`; observabilidade com métricas, logs e tracing; a seção obrigatória de integração com pelo menos quatro arquivos reais; e uma checklist final para validar os critérios de aceite do FDD.
+
 ## Prompts customizados
 
 ### Levantamento de evidências
@@ -68,9 +78,10 @@ pendências.
 A ordem sugerida de leitura é:
 
 1. [`README.md`](README.md): contexto do desafio e processo de produção.
-2. [`docs/mapping.md`](docs/mapping.md): matriz de evidências da transcrição e do código.
-3. [`docs/PRD.md`](docs/PRD.md): problema, público, escopo e objetivos do produto.
-4. [`docs/RFC.md`](docs/RFC.md): proposta técnica, alternativas e questões em aberto.
-5. [`docs/adrs/`](docs/adrs/): decisões arquiteturais e seus trade-offs.
-6. [`docs/FDD.md`](docs/FDD.md): fluxos, contratos e detalhes de implementação.
-7. [`docs/TRACKER.md`](docs/TRACKER.md): rastreabilidade dos itens até suas fontes.
+2. [`AGENTS.md`](AGENTS.md): regras para manter a documentação e registrar o processo.
+3. [`docs/mapping.md`](docs/mapping.md): matriz de evidências da transcrição e do código.
+4. [`docs/PRD.md`](docs/PRD.md): problema, público, escopo e objetivos do produto.
+5. [`docs/RFC.md`](docs/RFC.md): proposta técnica, alternativas e questões em aberto.
+6. [`docs/adrs/`](docs/adrs/): decisões arquiteturais e seus trade-offs.
+7. [`docs/FDD.md`](docs/FDD.md): fluxos, contratos e detalhes de implementação.
+8. [`docs/TRACKER.md`](docs/TRACKER.md): rastreabilidade dos itens até suas fontes.
