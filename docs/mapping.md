@@ -163,3 +163,61 @@ Este documento cruza a reunião registrada em [`TRANSCRICAO.md`](../TRANSCRICAO.
 2. A reunião define o contrato conceitual, mas não fecha todos os detalhes de persistência: nomes finais de colunas, estratégia de claim/lock do worker, formato exato de resposta HTTP e política de retenção da DLQ continuam pendentes.
 3. O código atual não contém a feature de webhooks. Portanto, qualquer referência a `webhook_outbox`, `webhook_dead_letter`, `src/modules/webhooks` ou `src/worker.ts` neste documento é explicitamente uma referência proposta pela reunião, nunca uma afirmação de que o artefato já exista.
 4. Não foram feitas alterações em `src/`, `prisma/`, `tests/` ou nos arquivos existentes; este levantamento adiciona somente este arquivo de documentação.
+
+## 11. Itens documentais do PRD
+
+O PRD foi produzido a partir das evidências acima. Esta tabela explicita a
+correspondência dos itens de produto com suas fontes primárias; links para RFC,
+FDD e ADRs servem apenas à navegação e não substituem a transcrição ou o código.
+
+| ID PRD | Estado | Evidência primária | Relação com o levantamento |
+| --- | --- | --- | --- |
+| PRD-OBJ-01 | Fechado | `[09:00]–[09:02] Marcos; [09:09]–[09:10] Diego e Larissa` | RF-01; RNF-01 |
+| PRD-OBJ-02 | Fechado | `[09:33]–[09:34] Marcos, Bruno e Diego; [09:40]–[09:41] Bruno e Diego` | RF-05; DEC-09 |
+| PRD-OBJ-03 | Fechado | `[09:15]–[09:18] Diego, Bruno e Larissa` | RNF-07; RNF-08 |
+| PRD-FR-01 | Fechado | `[09:00]–[09:03] Marcos e Sofia` | RF-01 |
+| PRD-FR-02 | Fechado | `[09:31] Marcos` | RF-02 |
+| PRD-FR-03 | Fechado | `[09:32] Bruno; [09:32] Marcos; [09:32] Larissa` | RF-03 |
+| PRD-FR-04 | Fechado | `[09:33] Bruno` | RF-04 |
+| PRD-FR-05 | Fechado | `[09:33]–[09:34] Marcos, Bruno e Diego` | RF-05 |
+| PRD-FR-06 | Fechado | `[09:34] Marcos` | RF-06 |
+| PRD-FR-07 | Fechado | `[09:18] Diego; [09:35] Larissa` | RF-07 |
+| PRD-FR-08 | Fechado | `[09:35]–[09:36] Sofia e Larissa` | RF-08 |
+| PRD-FR-09 | Fechado | `[09:21]–[09:22] Sofia` | RF-09 |
+| PRD-FR-10 | Fechado | `[09:40]–[09:41] Bruno e Diego` | RF-10; DEC-09 |
+| PRD-FR-11 | Fechado | `[09:51]–[09:52] Larissa, Diego e Bruno` | RF-11; DEC-09 |
+| PRD-FR-12 | Fechado | `[09:43]–[09:45] Diego, Bruno e Sofia` | RF-12; RNF-13 |
+| PRD-NFR-01 | Fechado | `[09:02] Marcos; [09:09]–[09:11] Diego e Larissa` | RNF-01; RNF-02; RNF-04; RNF-05 |
+| PRD-NFR-02 | Fechado | `[09:15]–[09:18] Diego, Bruno e Larissa; [09:42] Sofia e Diego` | RNF-07; RNF-08; RNF-09 |
+| PRD-NFR-03 | Fechado | `[09:19]–[09:24] Sofia, Diego e Larissa` | RNF-10; RNF-11 |
+| PRD-NFR-04 | Fechado | `[09:23]–[09:24] Sofia, Diego e Larissa` | RNF-11 |
+| PRD-NFR-05 | Fechado | `[09:24]–[09:26] Diego, Sofia e Larissa` | RNF-12 |
+| PRD-NFR-06 | Fechado | `[09:12]–[09:13] Diego e Larissa` | RNF-06 |
+| PRD-NFR-07 | Fechado | `[09:27]–[09:30] Bruno e Larissa; [09:35]–[09:36] Sofia e Larissa` + código existente | RNF-14; RNF-15 |
+| PRD-DEC-01 | Fechado | `[09:04]–[09:08] Bruno, Larissa e Diego` | DEC-01; ALT-01; ALT-02 |
+| PRD-DEC-02 | Fechado | `[09:09]–[09:13] Diego, Marcos e Larissa` | DEC-02; DEC-03; ALT-03 |
+| PRD-DEC-03 | Fechado | `[09:15]–[09:18] Diego, Bruno e Larissa` | DEC-04; ALT-04; ALT-05; ALT-06 |
+| PRD-DEC-04 | Fechado | `[09:19]–[09:22] Sofia` | DEC-05; ALT-08 |
+| PRD-DEC-05 | Fechado | `[09:24]–[09:26] Diego, Sofia e Larissa` | DEC-06; ALT-07 |
+| PRD-DEC-06 | Fechado | `[09:51]–[09:52] Larissa, Diego e Bruno` | DEC-09; ALT-09 |
+| PRD-DEC-07 | Fechado | `[09:27]–[09:30] Bruno e Larissa` | DEC-07 |
+| PRD-DEP-01 | Observado/proposto | `src/modules/orders/order.service.ts:126-179` + `[09:40]–[09:41] Bruno e Diego` | 9.1; DEC-09 |
+| PRD-DEP-02 | Observado/proposto | `prisma/schema.prisma:5-9` + `[09:06] Diego; [09:18] Diego; [09:21] Bruno` | 9.1; 9.2 |
+| PRD-DEP-03 | Observado/proposto | `src/middlewares/auth.middleware.ts:27-61` + `[09:35]–[09:37] Sofia, Larissa e Marcos` | 9.1; RNF-15 |
+| PRD-DEP-04 | Observado | `prisma/schema.prisma:16-23`; `src/modules/orders/order.status.ts:3-37` | 9.1; RNF-06 |
+| PRD-DEP-05 | Observado | `src/middlewares/validate.middleware.ts:11-36`; `src/shared/errors/app-error.ts:3-15`; `src/middlewares/error.middleware.ts:14-65`; `src/shared/logger/index.ts:1-32` | 9.1; RNF-14 |
+| PRD-DEP-06 | Proposto | `[09:11] Larissa; [09:27]–[09:28] Bruno` | 9.2 |
+| PRD-RISK-01 | Avaliação qualitativa | `[09:15]–[09:18] Diego, Bruno e Larissa; [09:42] Sofia e Diego` | RNF-07; RNF-09 |
+| PRD-RISK-02 | Avaliação qualitativa | `[09:19]–[09:24] Sofia; [09:22] Diego; [09:45]–[09:47] Larissa e Sofia` | RNF-10; RNF-11; RNF-16 |
+| PRD-RISK-03 | Avaliação qualitativa | `[09:08] Diego` | QA-03; OOS-02 |
+| PRD-RISK-04 | Avaliação qualitativa | `[09:12]–[09:13] Diego e Larissa; [09:24]–[09:26] Diego, Sofia e Larissa` | RNF-06; RNF-12; OOS-03; OOS-07 |
+| PRD-OOS-01 | Fechado | `[09:02]–[09:03] Sofia e Marcos` | OOS-01 |
+| PRD-OOS-02 | Fechado/adiado | `[09:37]–[09:38] Marcos e Larissa` | OOS-04; QA-05 |
+| PRD-OOS-03 | Fechado | `[09:39]–[09:40] Marcos e Larissa` | OOS-05; QA-06 |
+| PRD-OOS-04 | Fechado/adiado | `[09:08] Diego` | OOS-02; QA-03 |
+| PRD-OOS-05 | Fechado/limitado | `[09:12]–[09:13] Diego e Larissa; [09:24]–[09:26] Diego, Sofia e Larissa` | OOS-03; OOS-07; QA-02 |
+| PRD-QA-01 | Aberto/adiado | `[09:38]–[09:39] Diego e Larissa` | QA-01; OOS-06 |
+| PRD-QA-02 | Aberto/adiado | `[09:12]–[09:13] Diego e Larissa` | QA-02 |
+| PRD-QA-03 | Aberto/adiado | `[09:08] Diego` | QA-03 |
+| PRD-QA-04 | Aberto/adiado | `[09:36]–[09:37] Sofia e Marcos` | QA-04 |
+| PRD-QA-05 | Aberto/adiado | `[09:15]–[09:17] Diego e Larissa` | QA-08 |

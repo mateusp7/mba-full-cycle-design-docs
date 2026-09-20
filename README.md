@@ -65,6 +65,20 @@ Também foram substituídas as regras genéricas de PRD em inglês e de nove se�
 
 O modelo mínimo de saída foi movido para [`references/prd-template.md`](.agents/skills/prd-writer/references/prd-template.md), mantendo o `SKILL.md` concentrado no processo, nas regras de evidência e na validação. A skill passou a referenciar esse arquivo quando o PRD é criado ou revisado.
 
+### Produção do PRD e atualização do Tracker
+
+Com a skill `prd-writer`, o placeholder de [`docs/PRD.md`](docs/PRD.md) foi
+substituído por um PRD em português com as doze seções exigidas. A redação foi
+feita depois da leitura do `CHALLENGE.md`, `TRANSCRICAO.md`,
+`docs/mapping.md`, código existente, RFC, FDD, ADRs e Tracker. O documento
+recebeu IDs estáveis para objetivos, requisitos, decisões, dependências, riscos,
+questões abertas, exclusões e critérios de aceitação.
+
+No mesmo ciclo, `docs/mapping.md` ganhou a seção de correspondência dos itens do
+PRD com as evidências primárias e `docs/TRACKER.md` recebeu as linhas do PRD.
+Nenhum arquivo de código, Prisma, teste, configuração, transcrição ou contrato
+do desafio foi alterado.
+
 ## Iterações e ajustes
 
 ### Ajuste do `AGENTS.md` para explicitar iterações corretivas
@@ -94,6 +108,13 @@ O modelo mínimo de saída foi movido para [`references/prd-template.md`](.agent
 - **Problema identificado:** essas instruções adicionavam decisões desnecessárias ao fluxo de criação do único arquivo esperado, `docs/PRD.md`, e deixavam o ponto de entrada mais extenso do que o necessário.
 - **Ajuste realizado:** os valores do projeto, da pasta e do arquivo de saída foram fixados na própria skill; a etapa de clarificação foi removida; e o modelo foi extraído para `.agents/skills/prd-writer/references/prd-template.md`, com referência no `SKILL.md`.
 - **Resultado:** a skill ficou focada exclusivamente na criação ou revisão documental do PRD, com contexto pré-preenchido e carregamento separado do modelo. Contagem desta skill: 2 iterações corretivas registradas.
+
+### Produção corretiva do PRD e ajuste de consistência
+
+- **Estado anterior:** `docs/PRD.md` continha apenas um comentário indicando que o documento seria elaborado.
+- **Problema identificado:** o artefato não atendia às doze seções do desafio, não registrava os oito requisitos funcionais mínimos, não apresentava critérios de aceitação nem mantinha rastreabilidade própria no Tracker.
+- **Ajuste realizado:** o placeholder foi substituído pelo PRD completo, com fontes primárias, requisitos funcionais e não funcionais, exclusões, questões abertas, riscos, critérios de aceitação e estratégia de testes. Durante a revisão, a meta de consistência foi restringida a endpoints elegíveis para não conflitar com o filtro que não cria evento quando nenhum webhook assina o status. O `mapping.md` e o `TRACKER.md` foram atualizados no mesmo ciclo.
+- **Resultado:** o PRD passou a cumprir a estrutura e os mínimos documentais exigidos, preservando a distinção entre capacidades incluídas, exclusões, decisões fechadas e questões abertas. Contagem desta iteração corretiva do PRD: 1.
 
 ## Prompts customizados
 

@@ -1,8 +1,9 @@
 # Tracker
 
 Esta é uma versão incremental do Tracker. Ela cobre os itens relevantes
-registrados nos seis ADRs, no RFC e no FDD atualmente consolidados. O PRD ainda
-é um placeholder e não acrescenta itens documentais rastreáveis nesta etapa.
+registrados nos seis ADRs, no RFC, no FDD e no PRD atualmente consolidados.
+Itens documentais relevantes do PRD foram acrescentados ao final da tabela no
+mesmo ciclo de sua produção.
 
 As linhas usam a fonte primária do item: `TRANSCRICAO` para decisões, requisitos
 e restrições discutidos na reunião; `CODIGO` somente para arquivos existentes no
@@ -143,3 +144,72 @@ pela transcrição.
 | ADR-006-COD-03 | `docs/adrs/ADR-006-reuso-dos-padroes-existentes.md` | Evidência de integração | `AppError` define `statusCode`, `errorCode` e `details`. | `CODIGO` | `src/shared/errors/app-error.ts:3-15` |
 | ADR-006-COD-04 | `docs/adrs/ADR-006-reuso-dos-padroes-existentes.md` | Evidência de integração | O middleware central trata `AppError`, Zod, Prisma e erros não tratados. | `CODIGO` | `src/middlewares/error.middleware.ts:14-65` |
 | ADR-006-COD-05 | `docs/adrs/ADR-006-reuso-dos-padroes-existentes.md` | Evidência de integração | O logger existente usa Pino, timestamp ISO e redaction. | `CODIGO` | `src/shared/logger/index.ts:1-32` |
+| PRD-OBJ-01 | `docs/PRD.md` | Objetivo | Atender latência percebida inferior a 10 segundos com polling de 2 segundos. | `TRANSCRICAO` | [09:00]–[09:02] Marcos; [09:09]–[09:10] Diego e Larissa |
+| PRD-OBJ-02 | `docs/PRD.md` | Objetivo | Manter evento e mudança confirmada correspondentes para cada endpoint elegível. | `TRANSCRICAO` | [09:33]–[09:34] Marcos, Bruno e Diego; [09:40]–[09:41] Bruno e Diego |
+| PRD-OBJ-03 | `docs/PRD.md` | Objetivo | Tratar falhas com cinco tentativas, backoff e DLQ recuperável. | `TRANSCRICAO` | [09:15]–[09:18] Diego, Bruno e Larissa |
+| PRD-FR-01 | `docs/PRD.md` | Requisito Funcional | Criar notificação outbound para mudança de status em endpoint elegível. | `TRANSCRICAO` | [09:00]–[09:03] Marcos e Sofia |
+| PRD-FR-02 | `docs/PRD.md` | Requisito Funcional | Permitir cadastro de URL e status, gerando e devolvendo a secret. | `TRANSCRICAO` | [09:31] Marcos |
+| PRD-FR-03 | `docs/PRD.md` | Requisito Funcional | Associar configuração ao `customer_id` explícito, não ao JWT. | `TRANSCRICAO` | [09:32] Bruno; [09:32] Marcos; [09:32] Larissa |
+| PRD-FR-04 | `docs/PRD.md` | Requisito Funcional | Permitir editar, remover e listar configurações por customer. | `TRANSCRICAO` | [09:33] Bruno |
+| PRD-FR-05 | `docs/PRD.md` | Requisito Funcional | Filtrar status na inserção da outbox e evitar eventos não elegíveis. | `TRANSCRICAO` | [09:33]–[09:34] Marcos, Bruno e Diego |
+| PRD-FR-06 | `docs/PRD.md` | Requisito Funcional | Disponibilizar os últimos 100 deliveries com resultado, payload, resposta e duração. | `TRANSCRICAO` | [09:34] Marcos |
+| PRD-FR-07 | `docs/PRD.md` | Requisito Funcional | Reprocessar item da DLQ e recolocá-lo como pendente na outbox. | `TRANSCRICAO` | [09:18] Diego; [09:35] Larissa |
+| PRD-FR-08 | `docs/PRD.md` | Requisito Funcional | Exigir `ADMIN` e auditar o executor do replay. | `TRANSCRICAO` | [09:35]–[09:36] Sofia e Larissa |
+| PRD-FR-09 | `docs/PRD.md` | Requisito Funcional | Rotacionar secret por endpoint com validade antiga de 24 horas. | `TRANSCRICAO` | [09:21]–[09:22] Sofia |
+| PRD-FR-10 | `docs/PRD.md` | Requisito Funcional | Inserir o evento na mesma transação do pedido e do histórico. | `TRANSCRICAO` | [09:40]–[09:41] Bruno e Diego |
+| PRD-FR-11 | `docs/PRD.md` | Requisito Funcional | Persistir snapshot do payload no momento da mudança. | `TRANSCRICAO` | [09:51]–[09:52] Larissa, Diego e Bruno |
+| PRD-FR-12 | `docs/PRD.md` | Requisito Funcional | Entregar payload enxuto com campos e headers definidos, sem `items`. | `TRANSCRICAO` | [09:43]–[09:45] Diego, Bruno e Sofia |
+| PRD-NFR-01 | `docs/PRD.md` | Requisito Não Funcional | Usar processamento assíncrono, polling de 2 segundos e latência esperada inferior a 10 segundos. | `TRANSCRICAO` | [09:02] Marcos; [09:09]–[09:11] Diego e Larissa |
+| PRD-NFR-02 | `docs/PRD.md` | Requisito Não Funcional | Aplicar timeout de 10 segundos, cinco retries e DLQ separada. | `TRANSCRICAO` | [09:15]–[09:18] Diego, Bruno e Larissa; [09:42] Sofia e Diego |
+| PRD-NFR-03 | `docs/PRD.md` | Requisito Não Funcional | Usar HTTPS, HMAC-SHA256, secret por endpoint e rotação de 24 horas. | `TRANSCRICAO` | [09:19]–[09:24] Sofia, Diego e Larissa |
+| PRD-NFR-04 | `docs/PRD.md` | Requisito Não Funcional | Rejeitar payload acima de 64 KB sem truncamento. | `TRANSCRICAO` | [09:23]–[09:24] Sofia, Diego e Larissa |
+| PRD-NFR-05 | `docs/PRD.md` | Requisito Não Funcional | Entregar at-least-once e fornecer `X-Event-Id` para deduplicação. | `TRANSCRICAO` | [09:24]–[09:26] Diego, Sofia e Larissa |
+| PRD-NFR-06 | `docs/PRD.md` | Requisito Não Funcional | Limitar a ordenação à primeira versão single-worker e por `order_id`. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa |
+| PRD-NFR-07 | `docs/PRD.md` | Requisito Não Funcional | Reutilizar padrões de erros, logging, validação, módulos e autorização existentes. | `TRANSCRICAO` | [09:27]–[09:30] Bruno e Larissa; [09:35]–[09:36] Sofia e Larissa |
+| PRD-DEC-01 | `docs/PRD.md` | Decisão | Usar outbox transacional no MySQL em vez de HTTP síncrono ou Redis. | `TRANSCRICAO` | [09:04]–[09:08] Bruno, Larissa e Diego |
+| PRD-DEC-02 | `docs/PRD.md` | Decisão | Usar worker separado com polling de 2 segundos e single-worker inicial. | `TRANSCRICAO` | [09:09]–[09:13] Diego, Marcos e Larissa |
+| PRD-DEC-03 | `docs/PRD.md` | Decisão | Aplicar cinco retries com backoff e DLQ separada. | `TRANSCRICAO` | [09:15]–[09:18] Diego, Bruno e Larissa |
+| PRD-DEC-04 | `docs/PRD.md` | Decisão | Usar HMAC-SHA256 e secret única por endpoint com rotação. | `TRANSCRICAO` | [09:19]–[09:22] Sofia |
+| PRD-DEC-05 | `docs/PRD.md` | Decisão | Usar at-least-once com `X-Event-Id`, sem exactly-once. | `TRANSCRICAO` | [09:24]–[09:26] Diego, Sofia e Larissa |
+| PRD-DEC-06 | `docs/PRD.md` | Decisão | Persistir snapshot na inserção, e não renderizar no envio. | `TRANSCRICAO` | [09:51]–[09:52] Larissa, Diego e Bruno |
+| PRD-DEC-07 | `docs/PRD.md` | Decisão | Reutilizar padrões de módulos, erros, logging e validação. | `TRANSCRICAO` | [09:27]–[09:30] Bruno e Larissa |
+| PRD-DEP-01 | `docs/PRD.md` | Dependência | `changeStatus` é a transação de integração do enqueue. | `CODIGO` | `src/modules/orders/order.service.ts:126-179` |
+| PRD-DEP-02 | `docs/PRD.md` | Dependência | MySQL/Prisma e tabelas de webhook propostas sustentam outbox, histórico e DLQ. | `CODIGO` | `prisma/schema.prisma:5-9` |
+| PRD-DEP-03 | `docs/PRD.md` | Dependência | JWT, `customer_id` explícito e `requireRole('ADMIN')` sustentam acesso. | `CODIGO` | `src/middlewares/auth.middleware.ts:27-61` |
+| PRD-DEP-04 | `docs/PRD.md` | Dependência | Enum e máquina de estados existentes sustentam os filtros de status. | `CODIGO` | `prisma/schema.prisma:16-23`; `src/modules/orders/order.status.ts:3-37` |
+| PRD-DEP-05 | `docs/PRD.md` | Dependência | Schemas, AppError, middleware, Pino e composition root sustentam compatibilidade. | `CODIGO` | `src/middlewares/validate.middleware.ts:11-36`; `src/shared/errors/app-error.ts:3-15`; `src/middlewares/error.middleware.ts:14-65`; `src/shared/logger/index.ts:1-32` |
+| PRD-DEP-06 | `docs/PRD.md` | Dependência proposta | Módulo de webhooks e entry point do worker ainda precisam ser criados. | `TRANSCRICAO` | [09:11] Larissa; [09:27]–[09:28] Bruno |
+| PRD-RISK-01 | `docs/PRD.md` | Risco | Indisponibilidade do cliente pode gerar retries e DLQ. | `TRANSCRICAO` | [09:15]–[09:18] Diego, Bruno e Larissa; [09:42] Sofia e Diego |
+| PRD-RISK-02 | `docs/PRD.md` | Risco | Vazamento de secret pode permitir falsificação de chamadas. | `TRANSCRICAO` | [09:19]–[09:24] Sofia; [09:22] Diego; [09:45]–[09:47] Larissa e Sofia |
+| PRD-RISK-03 | `docs/PRD.md` | Risco | Retenção não definida pode fazer tabelas crescerem sem controle. | `TRANSCRICAO` | [09:08] Diego |
+| PRD-RISK-04 | `docs/PRD.md` | Risco | At-least-once e single-worker limitam deduplicação e ordering. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa; [09:24]–[09:26] Diego, Sofia e Larissa |
+| PRD-OOS-01 | `docs/PRD.md` | Fora de escopo | Webhooks inbound não entram na primeira versão. | `TRANSCRICAO` | [09:02]–[09:03] Sofia e Marcos |
+| PRD-OOS-02 | `docs/PRD.md` | Fora de escopo | E-mail de alerta/fallback foi adiado. | `TRANSCRICAO` | [09:37]–[09:38] Marcos e Larissa |
+| PRD-OOS-03 | `docs/PRD.md` | Fora de escopo | Dashboard visual é projeto separado. | `TRANSCRICAO` | [09:39]–[09:40] Marcos e Larissa |
+| PRD-OOS-04 | `docs/PRD.md` | Fora de escopo | Arquivamento da outbox fica fora desta fase. | `TRANSCRICAO` | [09:08] Diego |
+| PRD-OOS-05 | `docs/PRD.md` | Fora de escopo | Ordering global, multi-worker e exactly-once não são garantidos. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa; [09:24]–[09:26] Diego, Sofia e Larissa |
+| PRD-QA-01 | `docs/PRD.md` | Questão aberta | Rate limiting será observado antes de decisão. | `TRANSCRICAO` | [09:38]–[09:39] Diego e Larissa |
+| PRD-QA-02 | `docs/PRD.md` | Questão aberta | Escala, claim/lock e ordering futuro foram adiados. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa |
+| PRD-QA-03 | `docs/PRD.md` | Questão aberta | Retenção e arquivamento não têm duração definida. | `TRANSCRICAO` | [09:08] Diego |
+| PRD-QA-04 | `docs/PRD.md` | Questão aberta | Endurecimento do CRUD ficou para depois. | `TRANSCRICAO` | [09:36]–[09:37] Sofia e Marcos |
+| PRD-QA-05 | `docs/PRD.md` | Questão aberta | A indexação entre tentativas e intervalos de backoff precisa ser confirmada. | `TRANSCRICAO` | [09:15]–[09:17] Diego e Larissa |
+| PRD-CA-01 | `docs/PRD.md` | Critério de aceitação | Mudança elegível gera evento pendente após commit. | `TRANSCRICAO` | [09:00]–[09:03] Marcos e Sofia; [09:40]–[09:41] Bruno e Diego |
+| PRD-CA-02 | `docs/PRD.md` | Critério de aceitação | Customer sem endpoint elegível não gera evento. | `TRANSCRICAO` | [09:33]–[09:34] Marcos, Bruno e Diego |
+| PRD-CA-03 | `docs/PRD.md` | Critério de aceitação | Cadastro HTTPS persiste endpoint e devolve secret gerada. | `TRANSCRICAO` | [09:31] Marcos; [09:23] Sofia |
+| PRD-CA-04 | `docs/PRD.md` | Critério de aceitação | URL HTTP é rejeitada. | `TRANSCRICAO` | [09:23] Sofia |
+| PRD-CA-05 | `docs/PRD.md` | Critério de aceitação | Vínculo usa `customer_id` explícito, não subject do JWT. | `TRANSCRICAO` | [09:32] Bruno; [09:32] Marcos; [09:32] Larissa |
+| PRD-CA-06 | `docs/PRD.md` | Critério de aceitação | PATCH, DELETE e GET refletem configuração do customer correto. | `TRANSCRICAO` | [09:33] Bruno |
+| PRD-CA-07 | `docs/PRD.md` | Critério de aceitação | Outbox contém apenas endpoints que assinam o status. | `TRANSCRICAO` | [09:33]–[09:34] Marcos, Bruno e Diego |
+| PRD-CA-08 | `docs/PRD.md` | Critério de aceitação | Histórico retorna no máximo 100 deliveries e seus dados. | `TRANSCRICAO` | [09:34] Marcos |
+| PRD-CA-09 | `docs/PRD.md` | Critério de aceitação | Replay da DLQ recoloca item pendente na outbox. | `TRANSCRICAO` | [09:18] Diego; [09:35] Larissa |
+| PRD-CA-10 | `docs/PRD.md` | Critério de aceitação | Replay exige ADMIN e registra executor. | `TRANSCRICAO` | [09:35]–[09:36] Sofia e Larissa |
+| PRD-CA-11 | `docs/PRD.md` | Critério de aceitação | Secret antiga funciona 24 horas após rotação e depois expira. | `TRANSCRICAO` | [09:21]–[09:22] Sofia |
+| PRD-CA-12 | `docs/PRD.md` | Critério de aceitação | Pedido, histórico e evento elegível compartilham commit; falha reverte. | `TRANSCRICAO` | [09:40]–[09:41] Bruno e Diego |
+| PRD-CA-13 | `docs/PRD.md` | Critério de aceitação | Snapshot não muda após nova alteração do pedido. | `TRANSCRICAO` | [09:51]–[09:52] Larissa, Diego e Bruno |
+| PRD-CA-14 | `docs/PRD.md` | Critério de aceitação | Payload e headers outbound estão completos e `items` ausente. | `TRANSCRICAO` | [09:43]–[09:45] Diego, Bruno e Sofia |
+| PRD-CA-15 | `docs/PRD.md` | Critério de aceitação | Worker consulta em 2 segundos e o teste mede a latência. | `TRANSCRICAO` | [09:09]–[09:10] Diego e Larissa; [09:02] Marcos |
+| PRD-CA-16 | `docs/PRD.md` | Critério de aceitação | Timeout entra no retry e falha final vai para DLQ. | `TRANSCRICAO` | [09:15]–[09:18] Diego, Bruno e Larissa; [09:42] Sofia e Diego |
+| PRD-CA-17 | `docs/PRD.md` | Critério de aceitação | Reenvio preserva `X-Event-Id` e não exige exactly-once. | `TRANSCRICAO` | [09:24]–[09:26] Diego, Sofia e Larissa |
+| PRD-CA-18 | `docs/PRD.md` | Critério de aceitação | Payload acima de 64 KB e URL HTTP são rejeitados. | `TRANSCRICAO` | [09:23]–[09:24] Sofia, Diego e Larissa |
+| PRD-CA-19 | `docs/PRD.md` | Critério de aceitação | Single-worker processa por `created_at` sem anunciar ordering global. | `TRANSCRICAO` | [09:12]–[09:13] Diego e Larissa |
+| PRD-CA-20 | `docs/PRD.md` | Critério de aceitação | Erros usam prefixo `WEBHOOK_` e replay usa ADMIN. | `TRANSCRICAO` | [09:28]–[09:30] Bruno e Larissa; [09:35]–[09:36] Sofia e Larissa |

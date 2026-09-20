@@ -184,12 +184,12 @@ A entrega é avaliada contra os critérios abaixo. Todos são obrigatórios.
 
 ### PRD (`docs/PRD.md`)
 
-- ☐ Arquivo existe e está em Markdown
-- ☐ Contém todas as seções obrigatórias listadas no requisito 1
-- ☐ Identifica no mínimo 8 requisitos funcionais discutidos na reunião
-- ☐ Inclui pelo menos 1 objetivo com métrica e meta quantitativa
-- ☐ Seção "Fora de escopo" lista pelo menos 2 itens explicitamente descartados ou adiados na reunião
-- ☐ Seção "Riscos" inclui pelo menos 2 riscos com probabilidade, impacto e mitigação
+- [X] Arquivo existe e está em Markdown
+- [X] Contém todas as seções obrigatórias listadas no requisito 1
+- [X] Identifica no mínimo 8 requisitos funcionais discutidos na reunião
+- [X] Inclui pelo menos 1 objetivo com métrica e meta quantitativa
+- [X] Seção "Fora de escopo" lista pelo menos 2 itens explicitamente descartados ou adiados na reunião
+- [X] Seção "Riscos" inclui pelo menos 2 riscos com probabilidade, impacto e mitigação
 
 ### RFC (`docs/RFC.md`)
 
